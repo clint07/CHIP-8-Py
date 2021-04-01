@@ -98,6 +98,7 @@ class Chip8:
     def get_instruction(self) -> int:
         """
         TODO
+
         Get instruction from memory.
         :return:
             Assembly instruction
@@ -154,6 +155,7 @@ class Chip8:
         The CPU sets the program counter to nnn.
 
         :param nnn:
+            Memory location
         """
         logger.debug(f"Instruction 1nnn: Jump to location:nnn.")
         
@@ -171,6 +173,7 @@ class Chip8:
         The PC is then set to nnn.
 
         :param nnn:
+            Memory location
         """
         logger.debug(f"Instruction 2nnn: Call subroutine at:nnn.")
 
@@ -193,8 +196,9 @@ class Chip8:
         increments the program counter by 2.
 
         :param vx:
+            Register index
         :param kk:
-        :return:
+            Register index
         """
         logger.debug("Instruction 3xkk: Skip next instruction if Vx == kk.")
     
@@ -210,8 +214,9 @@ class Chip8:
         increments the program counter by 2.
 
         :param vx:
+            Register index
         :param kk:
-        :return:
+            Data
         """
         logger.debug("Instruction 4xkk: Skip next instruction if Vx != kk.")
     
@@ -227,8 +232,9 @@ class Chip8:
         increments the program counter by 2.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 5xy0: Skip next isntruction if Vx = Vy.")
     
@@ -243,8 +249,9 @@ class Chip8:
         The CPU puts the value kk into register Vx.
 
         :param vx:
+            Register index
         :param kk:
-        :return:
+            Data
         """
         logger.debug("Instruction 6xkk: Set Vx = kk.")
 
@@ -257,8 +264,9 @@ class Chip8:
         Adds the value kk to the value of register Vx, then stores the result in Vx.
 
         :param vx:
+            Register index
         :param kk:
-        :return:
+            Data
         """
         logger.debug("Instruction 7xkk: Set Vx = Vx + kk.")
 
@@ -271,8 +279,9 @@ class Chip8:
         Stores the value of register Vy in register Vx.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xy0: Set Vx = Vy.")
 
@@ -287,8 +296,9 @@ class Chip8:
         then the same bit in the result is also 1. Otherwise, it is 0.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xy1: Set Vx = Vx | Vy.")
 
@@ -303,8 +313,9 @@ class Chip8:
         then the same bit in the result is also 1. Otherwise, it is 0.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xy2: Set Vx = Vx & Vy.")
 
@@ -320,8 +331,9 @@ class Chip8:
         Otherwise, it is 0.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xy3: Set Vx = Vx ^ Vy.")
 
@@ -335,8 +347,9 @@ class Chip8:
         VF is set to 1, otherwise 0. Only the lowest 8 bits of the result are kept, and stored in Vx.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xy4: Set Vx = Vx + Vy, set VF = carry.")
 
@@ -358,8 +371,9 @@ class Chip8:
         and the results stored in Vx.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xy5: Set Vx = Vx - Vy, set VF = NOT borrow.")
 
@@ -379,7 +393,7 @@ class Chip8:
         Then Vx is divided by 2.
 
         :param vx:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xy6: Set Vx = Vx SHR 1.")
 
@@ -397,8 +411,9 @@ class Chip8:
         and the results stored in Vx.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xy7: Set Vx = Vy - Vx, set VF = NOT borrow.")
 
@@ -418,7 +433,7 @@ class Chip8:
         Then Vx is multiplied by 2.
 
         :param vx:
-        :return:
+            Register index
         """
         logger.debug("Instruction 8xyE: Set Vx = Vx SHL 1.")
 
@@ -437,8 +452,9 @@ class Chip8:
         the program counter is increased by 2.
 
         :param vx:
+            Register index
         :param vy:
-        :return:
+            Register index
         """
         logger.debug("Instruction 9xy0: Skip next instruction if Vx != Vy.")
 
@@ -453,7 +469,7 @@ class Chip8:
         The value of register I is set to nnn.
 
         :param nnn:
-        :return:
+            Data
         """
         logger.debug("Instruction Annn: Set I = nnn.")
 
@@ -466,7 +482,7 @@ class Chip8:
         The program counter is set to nnn plus the value of V0.
 
         :param nnn:
-        :return:
+            Data
         """
         logger.debug("Instruction Bnnn: Jump to location nnn + V0.")
         self.program_counter = self.registers[0x0] + nnn
@@ -479,8 +495,9 @@ class Chip8:
         See instruction 8xy2 for more information on AND.
 
         :param vx:
+            Register index
         :param kk:
-        :return:
+            Data
         """
         logger.debug("Instruction Cxkk: Set Vx = random: int AND kk.")
 
@@ -504,9 +521,11 @@ class Chip8:
         for more information on the Chip-8 screen and sprites.
 
         :param vx:
+            Register index
         :param vy:
+            Register index
         :param n:
-        :return:
+            Integer
         """
         logger.debug("Instruction Dxyn: Display nbyte sprite starting at memory location I at (Vx, Vy), "
                      "set Vf = collusion.")
@@ -524,7 +543,7 @@ class Chip8:
         in the down position, PC is increased by 2.
 
         :param vx:
-        :return:
+            Register index
         """
         logger.debug("Instruction Ex9E: Skip instruction if key with the value of Vx is pressed.")
 
@@ -540,7 +559,8 @@ class Chip8:
         Checks the keyboard, and if the key corresponding to the value of Vx is currently
         in the up position, PC is increased by 2.
 
-        :return:
+        :param vx:
+            Register index
         """
         logger.debug("Instruction ExA1: Skip next instruction if key with the value of Vx is not pressed.")
 
@@ -552,8 +572,9 @@ class Chip8:
         """
         Instruction Fx07: Set Vx = delay timer value.
         The value of DT is placed into Vx.
+
         :param vx:
-        :return:
+            Register index
         """
         logger.debug("Instruction Fx07: Set Vx = delay timer value.")
 
@@ -567,8 +588,9 @@ class Chip8:
 
         Instruction Fx0A: Wait for a key press, store the value of the key in Vx.
         All execution stops until a key is pressed, then the value of that key is stored in Vx.
+
         :param vx:
-        :return:
+            Register index
         """
         logger.debug("Instruction Fx0A: Wait for a key press, store the value of the key in Vx.")
 
@@ -580,7 +602,9 @@ class Chip8:
         """
         Instruction Fx15: Set delay timer = Vx.
         DT is set equal to the value of Vx.
-        :return:
+
+        :param vx:
+            Register index
         """
         logger.debug("Instruction Fx15: Set delay timer = Vx.")
 
@@ -591,6 +615,9 @@ class Chip8:
         """
         Instruction Fx18: Set sound timer = Vx.
         ST is set equal to the value of Vx.
+
+        :param vx:
+            Register index
         """
         logger.debug("Instruction Fx18: Set sounder timer = Vx.")
 
@@ -601,6 +628,9 @@ class Chip8:
         """
         Instruction Fx1E: Set I = I + Vx.
         The values of I and Vx are added, and the results are stored in I/address register.
+
+        :param vx:
+            Register index
         """
         logger.debug("Instruction Fx1E : Set I = I + Vx.")
 
@@ -612,7 +642,9 @@ class Chip8:
         Instruction Fx29: Set I = location of sprite for digit Vx.
         The value of I is set to the location for the hexadecimal sprite corresponding
         to the value of Vx. See section 2.4, Display, for more information on the Chip-8 hexadecimal font.
-        :return:
+
+        :param vx:
+            Register index
         """
         logger.debug("Instruction Fx29: Set I = location of sprite for digit Vx.")
 
@@ -626,7 +658,7 @@ class Chip8:
         at location in I, the tens digit at location I+1, and the ones digit at location I+2.
 
         :param vx:
-        :return:
+            Register index
         """
         logger.debug("Instruction Fx33: Store BCD represention of Vx in memory locations I, I+1, I+2.")
 
@@ -645,7 +677,9 @@ class Chip8:
         Instruction Fx55: Store registers V0 through Vx in memory starting at location I.
         The CPU copies the values of registers V0 through Vx into memory,
         starting at the address in I.
-        :return:
+
+        :param vx:
+            Register index
         """
         logger.debug("Instruction Fx55: Store registers V0 through Vx in memory starting at location I.")
 
@@ -660,7 +694,7 @@ class Chip8:
         The CPU reads values from memory starting at location I into registers V0 through Vx.
 
         :param vx:
-        :return:
+            Register index
         """
         logger.debug("Instruction Fx65: Read registers V0 through Vx in memory starting at location I.")
 
