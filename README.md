@@ -15,4 +15,4 @@ This CHIP-8 emulator is still a work in progress. Display and display-related in
 
 ## ROMs ##
 
-You can find CHIP-8 roms at [The Old Computer](theoldcomputer.com/roms/index.php?folder=Chip-8/Chip-8/Games).
+You can find CHIP-8 roms at [The Old Computer](https://www.theoldcomputer.com/roms/index.php?folder=Chip-8/Chip-8/Games).
